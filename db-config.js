@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise
 
 const prodURI = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}`
 
-const testURI = 'mongodb://127.0.0.1:27017/test'
+const testURI = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST_DEV}`
 
 const uriDict = {
   test: testURI,

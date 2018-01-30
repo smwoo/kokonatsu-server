@@ -3,12 +3,14 @@ const bodyParser = require('body-parser')
 require('dotenv').config()
 const userRoute = require('./routes/user')
 const macrosRoute = require('./routes/macros')
-
 const db = require('./db-config')
 
 
-db.connect('prod')
-
+if (process.env.DEV) {
+  db.connect('test')
+} else {
+  db.connect('prod')
+}
 
 const app = express()
 

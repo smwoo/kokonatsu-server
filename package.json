@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./server.js",
+    "dev": "DEV=1 nodemon ./server.js",
     "lint": "eslint -c ./.eslintrc.js --ext .js ./.",
     "lint:fix": "eslint -c ./.eslintrc.js --ext .js ./. --fix",
     "lint:nowarn": "eslint -c ./.eslintrc.js --ext .js ./. --quiet",
