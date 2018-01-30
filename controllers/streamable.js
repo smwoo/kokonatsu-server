@@ -8,6 +8,10 @@ const importUrl = async (url) => {
     params: {
       url,
     },
+    auth: {
+      username: process.env.STREAMABLE_USER,
+      password: process.env.STREAMABLE_PASS,
+    },
   })
 
   console.log(res.data)
