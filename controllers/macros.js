@@ -2,6 +2,7 @@ const gfycatApi = require('./gfycat')
 const imgurApi = require('./imgur')
 const streamableApi = require('./streamable')
 const MacroManager = require('../models/macro-manager')
+const { sortBy } = require('lodash')
 
 
 const PAGE_SIZE = 20
@@ -78,7 +79,7 @@ module.exports.newRoute = async (req, res) => {
   res.json(macroData)
 }
 
-module.exports.macrosRoute = async (req, res) => {
+module.exports.allRoute = async (req, res) => {
   const page = req.query.page || 1
 
   const macros = await MacroManager.find()
@@ -88,6 +89,22 @@ module.exports.macrosRoute = async (req, res) => {
     .exec()
 
   res.json(macros)
+}
+
+module.exports.macroRoute = async (req, res) => {
+  const { name } = req.params
+  const { number } = req.query
+
+  const macroManager = await MacroManager.findOne({ name }).populate('macros')
+
+  const macros = sortBy(macroManager.macros, 'created_at')
+
+  const high = macroManager.macros.length
+  const pick = number ? number - 1 : Math.floor(Math.random() * high)
+
+  const macro = macros[pick]
+
+  res.json(macro)
 }
 
 module.exports.generatePreview = generatePreview

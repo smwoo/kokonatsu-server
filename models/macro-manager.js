@@ -13,11 +13,8 @@ const macroManagerSchema = new Schema({
     index: true,
   },
   macros: [{
-    macro: {
-      type: Schema.Types.ObjectId,
-      ref: 'Macro',
-    },
-    created_at: Date,
+    type: Schema.Types.ObjectId,
+    ref: 'Macro',
   }],
 })
 
@@ -33,7 +30,7 @@ macroManagerSchema.statics.createNewMacro = async function (macroManagerData, ma
   const newMacro = await Macro.create(macroData)
   const newMacroManager = await this.findOneOrCreate(macroManagerData)
 
-  newMacroManager.macros.push({ macro: newMacro, created_at: newMacro.created_at })
+  newMacroManager.macros.push(newMacro)
   newMacro.macroManager = newMacroManager
 
   newMacro.save()
