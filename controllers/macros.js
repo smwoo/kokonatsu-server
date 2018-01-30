@@ -80,7 +80,7 @@ module.exports.newRoute = async (req, res) => {
 }
 
 module.exports.allRoute = async (req, res) => {
-  const page = req.query.page || 1
+  const page = req.query.page - 1 || 0
 
   const macros = await MacroManager.find()
     .sort({ name: 'asc' })
