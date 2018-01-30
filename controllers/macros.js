@@ -1,5 +1,6 @@
-const gfycatApi = require('../controllers/gfycat')
-const streamableApi = require('../controllers/streamable')
+const gfycatApi = require('./gfycat')
+const imgurApi = require('./imgur')
+const streamableApi = require('./streamable')
 const MacroManager = require('../models/macro-manager')
 
 
@@ -8,12 +9,12 @@ const PAGE_SIZE = 20
 const generatePreview = async (sourceUrl, mediaType) => {
   if (mediaType === 'img') {
     const {
-      posterUrl, width, height,
-    } = await gfycatApi(sourceUrl)
+      link, width, height,
+    } = await imgurApi(sourceUrl)
 
     return {
-      url: posterUrl,
-      thumbnail: posterUrl,
+      url: link,
+      thumbnail: link,
       width,
       height,
     }
