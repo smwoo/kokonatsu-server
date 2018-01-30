@@ -89,3 +89,5 @@ module.exports.macrosRoute = async (req, res) => {
 
   res.json(macros)
 }
+
+module.exports.generatePreview = generatePreview
