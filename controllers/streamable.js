@@ -18,11 +18,10 @@ const importUrl = async (url) => {
   return res.data.shortcode
 }
 
-const getStreamableVideo = data => Object.assign(
-  {},
-  data.files.mp4,
-  { thumbnail: data.thumbnail_url },
-)
+const getStreamableVideo = data => ({
+  url: data.source,
+  thumbnail: data.thumbnail_url,
+})
 
 const checkStatus = async (shortCode) => {
   /* eslint-disable no-await-in-loop */
