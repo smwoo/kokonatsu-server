@@ -2,6 +2,7 @@ const gfycatApi = require('./gfycat')
 const imgurApi = require('./imgur')
 const streamableApi = require('./streamable')
 const MacroManager = require('../models/macro-manager')
+const Macro = require('../models/macro')
 const { sortBy } = require('lodash')
 
 
@@ -105,6 +106,32 @@ module.exports.macroRoute = async (req, res) => {
   const macro = macros[pick]
 
   res.json(macro)
+}
+
+module.exports.deleteRoute = async (req, res) => {
+  const { id } = req.params
+
+  const macro = await Macro.findById(id)
+
+  if (macro === null) {
+    res.status(404).send('Macro Not Found')
+    return
+  }
+
+  const macroManagerID = macro.macroManager
+
+  const macroManager = await MacroManager.findByIdAndUpdate(
+    macroManagerID,
+    { $pull: { macros: id } },
+  )
+
+  if (macroManager.macros.length <= 1) {
+    await MacroManager.findByIdAndRemove(macroManagerID)
+  }
+
+  const delMacro = await Macro.findByIdAndRemove(id)
+
+  res.json(delMacro)
 }
 
 module.exports.generatePreview = generatePreview

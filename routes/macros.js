@@ -4,6 +4,7 @@ const {
   newRoute,
   allRoute,
   macroRoute,
+  deleteRoute,
 } = require('../controllers/macros')
 
 
@@ -16,6 +17,8 @@ router.post('/new', newRoute)
 
 router.get('/all', allRoute)
 
-router.get('/macro/:name', macroRoute)
+router.get('/:name', macroRoute)
+
+router.delete('/:id', deleteRoute)
 
 module.exports = router
