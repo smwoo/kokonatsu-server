@@ -19,7 +19,7 @@ const importUrl = async (url) => {
 }
 
 const getStreamableVideo = data => ({
-  url: data.source,
+  url: data.url,
 })
 
 const checkStatus = async (shortCode) => {

@@ -100,12 +100,17 @@ module.exports.macroRoute = async (req, res) => {
 
   const macros = sortBy(macroManager.macros, 'created_at')
 
+  if (number && number > macros.length) {
+    res.status(500).send('Number greater than macros')
+    return
+  }
+
   const high = macroManager.macros.length
   const pick = number ? number - 1 : Math.floor(Math.random() * high)
 
   const macro = macros[pick]
 
-  res.json(macro)
+  res.json({ ...macro.toObject(), number: pick + 1, total: high })
 }
 
 module.exports.deleteRoute = async (req, res) => {
