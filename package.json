@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./server.js",
+    "start": "node ./server.js",
     "dev": "DEV=1 nodemon ./server.js",
     "lint": "eslint -c ./.eslintrc.js --ext .js ./.",
     "lint:fix": "eslint -c ./.eslintrc.js --ext .js ./. --fix",
@@ -26,6 +26,7 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.13.8",
     "morgan": "~1.9.0",
+    "newrelic": "^2.8.0",
     "serve-favicon": "~2.4.5",
     "uuid": "^3.1.0"
   },
