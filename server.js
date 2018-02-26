@@ -33,10 +33,3 @@ const port = process.env.PORT || 3000
 app.listen(port)
 
 console.log(`Server started on: ${port}`)
-
-
-// heroku keep alive ping
-setInterval(async () => {
-  const { data } = await axios.get(`http://localhost:${port}/ping`)
-  console.log(data)
-}, 60000)
